@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soccerfield.dao.StadiumMapper">
+  <resultMap id="BaseResultMap" type="com.soccerfield.entity.Stadium">
+    <id column="staid" jdbcType="INTEGER" property="staid" />
+    <result column="staname" jdbcType="VARCHAR" property="staname" />
+    <result column="staaddr" jdbcType="VARCHAR" property="staaddr" />
+    <result column="staintro" jdbcType="VARCHAR" property="staintro" />
+    <result column="stapic" jdbcType="VARCHAR" property="stapic" />
+    <result column="statel" jdbcType="VARCHAR" property="statel" />
+    <result column="staopentime" jdbcType="VARCHAR" property="staopentime" />
+    <result column="staclosetime" jdbcType="VARCHAR" property="staclosetime" />
+    <result column="staunittime" jdbcType="VARCHAR" property="staunittime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    staid, staname, staaddr, staintro, stapic, statel, staopentime, staclosetime, staunittime
+  </sql>
+  <select id="selectByExample" parameterType="com.soccerfield.entity.StadiumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stadium
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stadium
+    where staid = #{staid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stadium
+    where staid = #{staid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.soccerfield.entity.StadiumExample">
+    delete from stadium
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.soccerfield.entity.Stadium">
+    insert into stadium (staid, staname, staaddr, 
+      staintro, stapic, statel, 
+      staopentime, staclosetime, staunittime
+      )
+    values (#{staid,jdbcType=INTEGER}, #{staname,jdbcType=VARCHAR}, #{staaddr,jdbcType=VARCHAR}, 
+      #{staintro,jdbcType=VARCHAR}, #{stapic,jdbcType=VARCHAR}, #{statel,jdbcType=VARCHAR}, 
+      #{staopentime,jdbcType=VARCHAR}, #{staclosetime,jdbcType=VARCHAR}, #{staunittime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soccerfield.entity.Stadium">
+    insert into stadium
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staid != null">
+        staid,
+      </if>
+      <if test="staname != null">
+        staname,
+      </if>
+      <if test="staaddr != null">
+        staaddr,
+      </if>
+      <if test="staintro != null">
+        staintro,
+      </if>
+      <if test="stapic != null">
+        stapic,
+      </if>
+      <if test="statel != null">
+        statel,
+      </if>
+      <if test="staopentime != null">
+        staopentime,
+      </if>
+      <if test="staclosetime != null">
+        staclosetime,
+      </if>
+      <if test="staunittime != null">
+        staunittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staid != null">
+        #{staid,jdbcType=INTEGER},
+      </if>
+      <if test="staname != null">
+        #{staname,jdbcType=VARCHAR},
+      </if>
+      <if test="staaddr != null">
+        #{staaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="staintro != null">
+        #{staintro,jdbcType=VARCHAR},
+      </if>
+      <if test="stapic != null">
+        #{stapic,jdbcType=VARCHAR},
+      </if>
+      <if test="statel != null">
+        #{statel,jdbcType=VARCHAR},
+      </if>
+      <if test="staopentime != null">
+        #{staopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="staclosetime != null">
+        #{staclosetime,jdbcType=VARCHAR},
+      </if>
+      <if test="staunittime != null">
+        #{staunittime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.soccerfield.entity.StadiumExample" resultType="java.lang.Long">
+    select count(*) from stadium
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stadium
+    <set>
+      <if test="record.staid != null">
+        staid = #{record.staid,jdbcType=INTEGER},
+      </if>
+      <if test="record.staname != null">
+        staname = #{record.staname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staaddr != null">
+        staaddr = #{record.staaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staintro != null">
+        staintro = #{record.staintro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stapic != null">
+        stapic = #{record.stapic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statel != null">
+        statel = #{record.statel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staopentime != null">
+        staopentime = #{record.staopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staclosetime != null">
+        staclosetime = #{record.staclosetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staunittime != null">
+        staunittime = #{record.staunittime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stadium
+    set staid = #{record.staid,jdbcType=INTEGER},
+      staname = #{record.staname,jdbcType=VARCHAR},
+      staaddr = #{record.staaddr,jdbcType=VARCHAR},
+      staintro = #{record.staintro,jdbcType=VARCHAR},
+      stapic = #{record.stapic,jdbcType=VARCHAR},
+      statel = #{record.statel,jdbcType=VARCHAR},
+      staopentime = #{record.staopentime,jdbcType=VARCHAR},
+      staclosetime = #{record.staclosetime,jdbcType=VARCHAR},
+      staunittime = #{record.staunittime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soccerfield.entity.Stadium">
+    update stadium
+    <set>
+      <if test="staname != null">
+        staname = #{staname,jdbcType=VARCHAR},
+      </if>
+      <if test="staaddr != null">
+        staaddr = #{staaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="staintro != null">
+        staintro = #{staintro,jdbcType=VARCHAR},
+      </if>
+      <if test="stapic != null">
+        stapic = #{stapic,jdbcType=VARCHAR},
+      </if>
+      <if test="statel != null">
+        statel = #{statel,jdbcType=VARCHAR},
+      </if>
+      <if test="staopentime != null">
+        staopentime = #{staopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="staclosetime != null">
+        staclosetime = #{staclosetime,jdbcType=VARCHAR},
+      </if>
+      <if test="staunittime != null">
+        staunittime = #{staunittime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where staid = #{staid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soccerfield.entity.Stadium">
+    update stadium
+    set staname = #{staname,jdbcType=VARCHAR},
+      staaddr = #{staaddr,jdbcType=VARCHAR},
+      staintro = #{staintro,jdbcType=VARCHAR},
+      stapic = #{stapic,jdbcType=VARCHAR},
+      statel = #{statel,jdbcType=VARCHAR},
+      staopentime = #{staopentime,jdbcType=VARCHAR},
+      staclosetime = #{staclosetime,jdbcType=VARCHAR},
+      staunittime = #{staunittime,jdbcType=VARCHAR}
+    where staid = #{staid,jdbcType=INTEGER}
+  </update>
+</mapper>

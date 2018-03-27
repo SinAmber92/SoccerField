@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改页面</title>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#submit").click(function(){
+					
+					var user = {};
+					user.username= $("#username").val();
+					user.upassword = $("#upassword").val();
+					user.utelphone = $("#utelphone").val();
+					user.upersonid = $("#upersonid").val();
+					user.uicon = $("#uicon").val();
+
+/* 					alert(user.username);
+					alert(user.upassword);
+					alert(user.utelphone);
+					alert(user.upersonid);
+					alert(user.uicon); */
+					
+					$.ajax({
+						type:"post",
+						data:{user:JSON.stringify(user)},
+						url: "http://localhost:8080/SoccerField/user/modify",
+						dataType:"json",
+						async:true,
+						success:function(data){
+							if(data.code==0){
+								alert(data.message);
+								location="personinfo.html";
+							}else if(data.code==1){
+								alert(data.message);
+							}else{
+								alert(data.message);
+								location="login.html";
+							}																
+						}
+					});
+				});
+			}); 
+		</script>
+	</head>
+	<body>
+	
+		当前用户：<br /><br />
+		用户名：<input type="text" id="username" value=""/><br /><br />
+		密码：<input type="password" id="upassword" value="" /><br /><br />
+		电话：<input type="text" id="utelphone"  value=""/><br /><br />
+		身份证：<input type="text" id="upersonid"  value=""/><br /><br />
+		头像：<input type="text" id="uicon"  value=""/><br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="submit" value="提交"/>
+	</body>
+</html>

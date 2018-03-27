@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>登录页面</title>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#submit").click(function(){
+					var utelphone = $("#utelphone").val();
+					var upassword = $("#upassword").val();
+					$.ajax({
+						type:"post",
+						data:{
+							utelphone:utelphone,
+							upassword:upassword
+						},
+						url: "http://localhost:8080/SoccerField/user/login",
+						dataType:"json",
+						async:true,
+						success:function(data){
+								if(data.code==0){
+									console.log(data.data);
+									alert(data.message);
+									location="personinfo.html";
+								}else{
+									alert(data.message);
+								}
+						}
+					});
+				});
+				$("#register").click(function(){
+					location="register.html";
+				});
+			}); 
+		</script>
+	</head>
+	<body>
+		电话：<input type="text" id="utelphone" /><br /><br />
+		密码：<input type="password" id="upassword" /><br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="submit" value="登录"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="register" value="注册"/>
+	</body>
+</html>

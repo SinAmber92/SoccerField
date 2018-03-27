@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+   		<style>
+            .border{
+                border: 3px solid #000;
+            }
+        </style>
+        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/template.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#submit").click(function () {
+                   
+                    utelphone = $("[name='utelphone']").val();
+                    upassword = $("[name='upassword']").val();
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8080/SoccerField/user/login",
+                        data: { utelphone : utelphone,
+                        		upassword : upassword
+                        	},
+                        async: false,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 0) {
+                                console.log(data.data);
+                                alert(data.message);
+                                //走登录成功的流程
+                            } else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+                });
+                $("#submit1").click(function () {
+                    var areaid = $("[name='areaid1']").val();
+                    var date = $("[name='date1']").val();
+                    alert(areaid + "---" + date);
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8080/SoccerField/orderlist/getchoicetime",
+                        data: { areaid: areaid, date: date },
+                        dataType: "JSON",
+                        success: function (data) {
+                            $("#showchoicetime").html(template("showscript", {
+                                list: data.data
+                            }));
+                        }
+                    });
+                });
+                $("#register").click(function () {
+                    alert("asdas");
+                    //             	location="register.jsp";
+                });
+                
+                $("#submit2").click(function (){
+
+                    var orderlist = {};
+                    orderlist.userid = $("[name='userid2']").val();
+                    orderlist.oname = $("[name='oname2']").val();
+                    orderlist.otelphone = $("[name='otelphone2']").val();
+                    orderlist.areaid = $("[name='areaid2']").val();
+                    orderlist.orestarttime = $("[name='orestarttime2']").val();
+      
+                    $.ajax({
+                        type:"post",
+                        url:"orderlist/createorderlist",
+                        data:{neworderlist:JSON.stringify(orderlist)},
+                        dataType:"json",
+                        success:function(data){
+                            alert(data.message);
+                        }
+                    });
+                });
+
+                $("#submit3").click(function(){
+                    $.ajax({
+                        type:"post",
+                        url:"stadium/showallstadium",
+                        dataType:"json",
+                        success:function(data){
+                            alert(data.message);
+                            $("#showallstadium").html(template("showallstadiumscript",{list:data.data}));
+                        }
+                    });
+                });
+
+                $("#submit4").click(function(){
+                    var staid = $("[name='staid4']").val();
+                    $.ajax({
+                        type:"post",
+                        url:"http://localhost:8080/SoccerField/area/getinfobystaid",
+                        data:{staid:staid},
+                        dataType:"json",
+                        success:function(data){
+                            alert(data.message);
+                            $("#showareabystaid").html(template("showareabystaidscript",{list:data.data}));
+                        }
+                    });
+                });
+
+                $("#submit5").click(function(){
+                    var userid = $("[name='userid5']").val();
+                    $.ajax({
+                        type:"post",
+                        url:"orderlist/showperorderlist",
+                        data:{userid:userid},
+                        dataType:"json",
+                        success:function(data){
+                            alert(data.message);
+                            $("#showperorderlist").html(template("showperorderlistscript",{list:data.data}));
+                        }
+                    });
+                });
+
+                $("#submit6").click(function(){
+                    var areaid = $("[name='areaid6']").val();
+                    $.ajax({
+                        type:"post",
+                        url:"area/getinfobyareaid",
+                        data:{areaid:areaid},
+                        dataType:"json",
+                        success:function(data){
+                            alert(data.message);
+                            $("#getinfobyareaid").html(data.data.areaid+"---"+data.data.staid+"---"+data.data.areaintro+"---"+data.data.areapic+"---"+data.data.aunprice+"---"+data.data.acashpledge);
+                        }
+                    });
+                });
+
+                $("#submit7").click(function(){
+                    var user = {};
+                    user.upassword = $("[name='upassword7']").val();
+                    user.username = $("[name='username7']").val();
+                    user.utelphone = $("[name='utelphone7']").val();
+                    user.upersonid = $("[name='upersonid7']").val();
+                    user.uicon = $("[name='uicon7']").val();
+                    $.ajax({
+                        type:"post",
+                        url:"http://localhost:8080/SoccerField/user/register",
+                        data:{user:JSON.stringify(user)},
+                        dataType:"json",
+                        success:function(data){
+                            alert(data.message);
+                        }
+                    });
+                });
+            });
+        </script>
+        <script type="text/html" id="showscript">
+            {{each list as value i}}
+            date:{{value.date}}-----status:
+			{{if value.status}} true
+			{{else}} false
+			{{/if}}<br>
+            {{/each}}
+        </script>
+        <script type="text/html" id="showallstadiumscript">
+            {{each list as value i}}
+            staid:{{value.staid}}---
+            staname:{{value.staname}}---
+            staaddr:{{value.staaddr}}---
+            staintro:{{value.staintro}}---
+            stapic:{{value.stapic}}---
+            statel:{{value.statel}}---
+            staopentime:{{value.staopentime}}---
+            staclosetime:{{value.staclosetime}}---
+            staunittime:{{value.staunittime}}<br>
+            {{/each}}
+        </script>
+        <script type="text/html" id="showareabystaidscript">
+            {{each list as value i}}
+            {{value.areaid}}---
+            {{value.staid}}---
+            {{value.areaintro}}---
+            {{value.areapic}}---
+            {{value.aunprice}}---
+            {{value.acashpledge}}<br>
+            {{/each}}
+        </script>
+        <script type="text/html" id="showperorderlistscript">
+            {{each list as value i}}
+            {{value.orderid}}---
+            {{value.areaid}}---
+            {{value.staid}}---
+            {{value.ordertime}}---
+            {{value.orestarttime}}---
+            {{value.userid}}---
+            {{value.oname}}---
+            {{value.otelphone}}---
+            {{value.ototal}}<br>
+            {{/each}}
+        </script>
+</head>
+	<body>
+	    <div class="border">
+	        <input type="text" name="utelphone" value="111">
+	        <br>
+	        <input type="text" name="upassword" value="bbb">
+	        <br>
+	        <button id="submit">登录</button>
+	    </div>
+	    <div class="border">
+	        <input type="text" name="areaid1" value="1">
+	        <br>
+	        <input type="text" name="date1" value="20180322">
+	        <br>
+	        <div id="showchoicetime">
+	        </div>
+	        <button id="submit1">获取可选时间</button>
+	    </div>
+	    <div class="border">
+	        userid:<input type="text" name="userid2" value="10002"><br>
+	        oname:<input type="text" name="oname2" value="asdasd"><br>
+	        otelphone:<input type="text" name="otelphone2" value="13888885555"><br>
+	        areaid:<input type="text" name="areaid2" value="2"><br>
+	        orestarttime:<input type="text" name="orestarttime2" value="201803200900"><br>
+	        <button id="submit2">提交订单</button>
+	    </div>
+	    <div class="border">
+	        <div id="showallstadium">
+	        </div>
+	        <button id="submit3">显示所有球馆信息</button>
+	    </div>
+	    <div class="border">
+	        球馆ID：<input type="text" name="staid4" value="1"><br>
+	        <div id="showareabystaid">
+	        </div>
+	        <button id="submit4">显示指定球馆的所有场地信息</button>
+	    </div>
+	    <div class="border">
+	        userid：<input type="text" name="userid5" value="10001"><br>
+	        <div id="showperorderlist">
+	        </div>
+	        <button id="submit5">显示个人订单信息</button>
+	    </div>
+	    <div class="border">
+	        areaid：<input type="text" name="areaid6" value="3"><br>
+	        <div id="getinfobyareaid">
+	        </div>
+	        <button id="submit6">显示指定区域信息</button>
+	    </div>
+	    <div class="border">
+	        upassword：<input type="text" name="upassword7" value="123456"><br>
+	        username：<input type="text" name="username7" value="abcabcabc"><br>
+	        utelphone：<input type="text" name="utelphone7" value="13355558888"><br>
+	        upersonid：<input type="text" name="upersonid7" value="123456789"><br>
+	        uicon：<input type="text" name="uicon7" value="/mdsf/mfhgds"><br>
+	        <button id="submit7">注册</button>
+	    </div>
+	</body>
+</html>
+
+        

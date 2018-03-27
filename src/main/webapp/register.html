@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册页面</title>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+			function showImage() {
+		        var docObj = document.getElementById("uicon");
+		        var imgObjPreview = document.getElementById("preview");
+		            //设img属性  
+		            imgObjPreview.style.display = 'block';
+		            imgObjPreview.style.width = '300px';
+		            imgObjPreview.style.height = '300px';
+		            //imgObjPreview.src = docObj.files[0].getAsDataURL();  
+		            //目前版本不能用上面的getAsDataURL()方式获取，需要以下方式  
+		            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+		        return true;
+		    }
+			$(function(){
+				$("#submit").click(function(){
+					
+					var user = {};
+					user.username= $("#username").val();
+					user.upassword = $("#upassword").val();
+					user.utelphone = $("#utelphone").val();
+					user.upersonid = $("#upersonid").val();
+					user.uicon = "D://Download//pic//cartoon//pic.jpg";
+
+					$.ajax({
+						type:"post",
+						data:{user:JSON.stringify(user)},
+						url: "http://localhost:8080/SoccerField/user/register",
+						dataType:"json",
+						async:true,
+						success:function(data){
+							if(data.code==0){
+								alert(data.message);																
+								location="login.html";
+							}else{								
+								alert(data.message);
+							}
+						}
+					});
+				});
+			});
+		    
+		</script>
+	</head>
+	<body>
+		用户名：<input type="text" id="username" /><br /><br />
+		密码：<input type="password" id="upassword" /><br /><br />
+		电话：<input type="text" id="utelphone" /><br /><br />
+		身份证：<input type="text" id="upersonid" /><br /><br />
+     头像图片上传：<input type=file name="myfile" id="uicon" onchange="showImage();"><br /><br /><br />
+            <div id="localImag">
+                <img id="preview" width=-1 height=-1 style="diplay:none" />
+            </div><br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="submit" value="提交"/>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+[INFO] [2018-03-22 15:56:37][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+  [INFO] [2018-03-22 15:56:37][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 15:56:37 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 15:56:38][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+  [INFO] [2018-03-22 15:56:38][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+  [INFO] [2018-03-22 15:56:38][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 15:56:37 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:01:30][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+  [INFO] [2018-03-22 16:01:30][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@5ef60048: startup date [Thu Mar 22 16:01:30 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:01:30][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+  [INFO] [2018-03-22 16:01:30][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+  [INFO] [2018-03-22 16:01:31][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@5ef60048: startup date [Thu Mar 22 16:01:30 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:04:06][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+  [INFO] [2018-03-22 16:04:06][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@5ef60048: startup date [Thu Mar 22 16:04:06 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:04:07][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+  [INFO] [2018-03-22 16:04:07][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+  [INFO] [2018-03-22 16:04:07][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@5ef60048: startup date [Thu Mar 22 16:04:06 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:05:12][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+  [INFO] [2018-03-22 16:05:12][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 16:05:12 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:05:13][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+  [INFO] [2018-03-22 16:05:13][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+  [INFO] [2018-03-22 16:05:13][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 16:05:12 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:05:48][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+  [INFO] [2018-03-22 16:05:48][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 16:05:48 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:05:48][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+  [INFO] [2018-03-22 16:05:48][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+  [INFO] [2018-03-22 16:05:49][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 16:05:48 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:17:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+  [INFO] [2018-03-22 16:17:04][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 16:17:04 CST 2018]; root of context hierarchy
+  [INFO] [2018-03-22 16:17:04][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+  [INFO] [2018-03-22 16:17:04][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+  [INFO] [2018-03-22 16:17:05][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@3ee0fea4: startup date [Thu Mar 22 16:17:04 CST 2018]; root of context hierarchy
+  

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript">
+	    function showImage() {
+	        var docObj = document.getElementById("doc");
+	        var imgObjPreview = document.getElementById("preview");
+	            //设img属性  
+	            imgObjPreview.style.display = 'block';
+	            imgObjPreview.style.width = '300px';
+	            imgObjPreview.style.height = '300px';
+	            //imgObjPreview.src = docObj.files[0].getAsDataURL();  
+	            //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要以下方式  
+	            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+	        return true;
+	    }
+	</script>
+<title>头像上传网页</title>
+</head>
+<body>
+	<form action="filesUpload" method="POST" name="xiangmu" id="xiangmu"
+        enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>头像图片上传：</td>
+                <td><input type=file name="myfile" id="doc"
+                    onchange="showImage();">
+                </td>
+                <div id="localImag">
+                    <img id="preview" width=-1 height=-1 style="diplay:none" />
+                </div>
+            </tr>
+            <tr>
+                <td><input type="submit" value="提交" />
+                </td>
+            </tr>
+        </table>
+    </form>
+	
+</body>
+</html>

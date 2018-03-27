@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户信息页面</title>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#modify").click(function(){
+					location="modify.html";
+				});
+				$("#logout").click(function(){
+					$.ajax({
+						type:"post",
+						url: "http://localhost:8080/SoccerField/user/logout",
+						dataType:"json",
+						async:true,
+						success:function(data){
+							if(data.code==0){
+								alert(data.message);
+								location="login.html";
+							}else if(data.code==1){
+								alert(data.message);
+							}																
+						}
+					});
+				});
+			}); 
+		</script>
+	</head>
+	<body>
+	
+		<h2>用户信息页面</h2>
+		<input type="button" id="modify" value="编辑"/>
+		<input type="button" id="logout" value="注销"/>
+	</body>
+</html>
