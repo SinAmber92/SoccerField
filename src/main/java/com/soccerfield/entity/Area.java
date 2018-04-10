@@ -1,13 +1,7 @@
 package com.soccerfield.entity;
 
 public class Area {
-    @Override
-	public String toString() {
-		return "Area [areaid=" + areaid + ", staid=" + staid + ", areaintro=" + areaintro + ", areapic=" + areapic
-				+ ", aunprice=" + aunprice + ", acashpledge=" + acashpledge + "]";
-	}
-
-	private Integer areaid;
+    private Integer areaid;
 
     private Integer staid;
 
@@ -18,6 +12,8 @@ public class Area {
     private Integer aunprice;
 
     private Integer acashpledge;
+
+    private Integer adelsign;
 
     public Integer getAreaid() {
         return areaid;
@@ -65,5 +61,13 @@ public class Area {
 
     public void setAcashpledge(Integer acashpledge) {
         this.acashpledge = acashpledge;
+    }
+
+    public Integer getAdelsign() {
+        return adelsign;
+    }
+
+    public void setAdelsign(Integer adelsign) {
+        this.adelsign = adelsign;
     }
 }

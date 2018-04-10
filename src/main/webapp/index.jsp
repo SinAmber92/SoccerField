@@ -7,7 +7,7 @@
 		<title></title>
 	</head>
 	<body>
-		<jsp:forward page="login.html"></jsp:forward>
+		<jsp:forward page="index.html"></jsp:forward>
 	</body>
 </html>
 

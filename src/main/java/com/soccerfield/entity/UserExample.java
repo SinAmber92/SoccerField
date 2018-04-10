@@ -513,6 +513,66 @@ public class UserExample {
             addCriterion("uicon not between", value1, value2, "uicon");
             return (Criteria) this;
         }
+
+        public Criteria andUaccessIsNull() {
+            addCriterion("uaccess is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessIsNotNull() {
+            addCriterion("uaccess is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessEqualTo(Integer value) {
+            addCriterion("uaccess =", value, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessNotEqualTo(Integer value) {
+            addCriterion("uaccess <>", value, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessGreaterThan(Integer value) {
+            addCriterion("uaccess >", value, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessGreaterThanOrEqualTo(Integer value) {
+            addCriterion("uaccess >=", value, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessLessThan(Integer value) {
+            addCriterion("uaccess <", value, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessLessThanOrEqualTo(Integer value) {
+            addCriterion("uaccess <=", value, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessIn(List<Integer> values) {
+            addCriterion("uaccess in", values, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessNotIn(List<Integer> values) {
+            addCriterion("uaccess not in", values, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessBetween(Integer value1, Integer value2) {
+            addCriterion("uaccess between", value1, value2, "uaccess");
+            return (Criteria) this;
+        }
+
+        public Criteria andUaccessNotBetween(Integer value1, Integer value2) {
+            addCriterion("uaccess not between", value1, value2, "uaccess");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

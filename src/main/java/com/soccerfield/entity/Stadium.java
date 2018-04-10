@@ -19,6 +19,8 @@ public class Stadium {
 
     private String staunittime;
 
+    private Integer sdelsign;
+
     public Integer getStaid() {
         return staid;
     }
@@ -89,5 +91,13 @@ public class Stadium {
 
     public void setStaunittime(String staunittime) {
         this.staunittime = staunittime == null ? null : staunittime.trim();
+    }
+
+    public Integer getSdelsign() {
+        return sdelsign;
+    }
+
+    public void setSdelsign(Integer sdelsign) {
+        this.sdelsign = sdelsign;
     }
 }

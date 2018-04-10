@@ -13,6 +13,8 @@ public class User {
 
     private String uicon;
 
+    private Integer uaccess;
+
     public Integer getUserid() {
         return userid;
     }
@@ -59,5 +61,13 @@ public class User {
 
     public void setUicon(String uicon) {
         this.uicon = uicon == null ? null : uicon.trim();
+    }
+
+    public Integer getUaccess() {
+        return uaccess;
+    }
+
+    public void setUaccess(Integer uaccess) {
+        this.uaccess = uaccess;
     }
 }

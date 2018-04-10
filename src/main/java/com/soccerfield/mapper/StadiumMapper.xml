@@ -11,6 +11,7 @@
     <result column="staopentime" jdbcType="VARCHAR" property="staopentime" />
     <result column="staclosetime" jdbcType="VARCHAR" property="staclosetime" />
     <result column="staunittime" jdbcType="VARCHAR" property="staunittime" />
+    <result column="sdelsign" jdbcType="INTEGER" property="sdelsign" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    staid, staname, staaddr, staintro, stapic, statel, staopentime, staclosetime, staunittime
+    staid, staname, staaddr, staintro, stapic, statel, staopentime, staclosetime, staunittime, 
+    sdelsign
   </sql>
   <select id="selectByExample" parameterType="com.soccerfield.entity.StadiumExample" resultMap="BaseResultMap">
     select
@@ -106,12 +108,12 @@
   <insert id="insert" parameterType="com.soccerfield.entity.Stadium">
     insert into stadium (staid, staname, staaddr, 
       staintro, stapic, statel, 
-      staopentime, staclosetime, staunittime
-      )
+      staopentime, staclosetime, staunittime, 
+      sdelsign)
     values (#{staid,jdbcType=INTEGER}, #{staname,jdbcType=VARCHAR}, #{staaddr,jdbcType=VARCHAR}, 
       #{staintro,jdbcType=VARCHAR}, #{stapic,jdbcType=VARCHAR}, #{statel,jdbcType=VARCHAR}, 
-      #{staopentime,jdbcType=VARCHAR}, #{staclosetime,jdbcType=VARCHAR}, #{staunittime,jdbcType=VARCHAR}
-      )
+      #{staopentime,jdbcType=VARCHAR}, #{staclosetime,jdbcType=VARCHAR}, #{staunittime,jdbcType=VARCHAR}, 
+      #{sdelsign,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.soccerfield.entity.Stadium">
     insert into stadium
@@ -143,6 +145,9 @@
       <if test="staunittime != null">
         staunittime,
       </if>
+      <if test="sdelsign != null">
+        sdelsign,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="staid != null">
@@ -171,6 +176,9 @@
       </if>
       <if test="staunittime != null">
         #{staunittime,jdbcType=VARCHAR},
+      </if>
+      <if test="sdelsign != null">
+        #{sdelsign,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -210,6 +218,9 @@
       <if test="record.staunittime != null">
         staunittime = #{record.staunittime,jdbcType=VARCHAR},
       </if>
+      <if test="record.sdelsign != null">
+        sdelsign = #{record.sdelsign,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +236,8 @@
       statel = #{record.statel,jdbcType=VARCHAR},
       staopentime = #{record.staopentime,jdbcType=VARCHAR},
       staclosetime = #{record.staclosetime,jdbcType=VARCHAR},
-      staunittime = #{record.staunittime,jdbcType=VARCHAR}
+      staunittime = #{record.staunittime,jdbcType=VARCHAR},
+      sdelsign = #{record.sdelsign,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +269,9 @@
       <if test="staunittime != null">
         staunittime = #{staunittime,jdbcType=VARCHAR},
       </if>
+      <if test="sdelsign != null">
+        sdelsign = #{sdelsign,jdbcType=INTEGER},
+      </if>
     </set>
     where staid = #{staid,jdbcType=INTEGER}
   </update>
@@ -269,7 +284,8 @@
       statel = #{statel,jdbcType=VARCHAR},
       staopentime = #{staopentime,jdbcType=VARCHAR},
       staclosetime = #{staclosetime,jdbcType=VARCHAR},
-      staunittime = #{staunittime,jdbcType=VARCHAR}
+      staunittime = #{staunittime,jdbcType=VARCHAR},
+      sdelsign = #{sdelsign,jdbcType=INTEGER}
     where staid = #{staid,jdbcType=INTEGER}
   </update>
 </mapper>

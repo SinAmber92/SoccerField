@@ -75,5 +75,27 @@ public class UserServiceImpl implements UserService{
 		return  userMapper.selectByPrimaryKey(userid);
 	}
 
+	//遍历普通用户信息
+	@Override
+	public List<User> getNorUser() {
+		
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andUaccessEqualTo(0);
+		
+		return userMapper.selectByExample(userExample);
+	}
+
+	//遍历所有用户信息
+	@Override
+	public List<User> getAllUser() {
+		return userMapper.selectByExample(null);
+	}
+
+	//删除指定用户
+	@Override
+	public int delUser(int userid) {
+		return userMapper.deleteByPrimaryKey(userid);
+	}
+
 }
 

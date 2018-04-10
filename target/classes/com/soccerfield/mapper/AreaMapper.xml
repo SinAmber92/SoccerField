@@ -8,6 +8,7 @@
     <result column="areapic" jdbcType="VARCHAR" property="areapic" />
     <result column="aunprice" jdbcType="INTEGER" property="aunprice" />
     <result column="acashpledge" jdbcType="INTEGER" property="acashpledge" />
+    <result column="adelsign" jdbcType="INTEGER" property="adelsign" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    areaid, staid, areaintro, areapic, aunprice, acashpledge
+    areaid, staid, areaintro, areapic, aunprice, acashpledge, adelsign
   </sql>
   <select id="selectByExample" parameterType="com.soccerfield.entity.AreaExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.soccerfield.entity.Area">
     insert into area (areaid, staid, areaintro, 
-      areapic, aunprice, acashpledge
-      )
+      areapic, aunprice, acashpledge, 
+      adelsign)
     values (#{areaid,jdbcType=INTEGER}, #{staid,jdbcType=INTEGER}, #{areaintro,jdbcType=VARCHAR}, 
-      #{areapic,jdbcType=VARCHAR}, #{aunprice,jdbcType=INTEGER}, #{acashpledge,jdbcType=INTEGER}
-      )
+      #{areapic,jdbcType=VARCHAR}, #{aunprice,jdbcType=INTEGER}, #{acashpledge,jdbcType=INTEGER}, 
+      #{adelsign,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.soccerfield.entity.Area">
     insert into area
@@ -129,6 +130,9 @@
       <if test="acashpledge != null">
         acashpledge,
       </if>
+      <if test="adelsign != null">
+        adelsign,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="areaid != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="acashpledge != null">
         #{acashpledge,jdbcType=INTEGER},
+      </if>
+      <if test="adelsign != null">
+        #{adelsign,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.acashpledge != null">
         acashpledge = #{record.acashpledge,jdbcType=INTEGER},
       </if>
+      <if test="record.adelsign != null">
+        adelsign = #{record.adelsign,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       areaintro = #{record.areaintro,jdbcType=VARCHAR},
       areapic = #{record.areapic,jdbcType=VARCHAR},
       aunprice = #{record.aunprice,jdbcType=INTEGER},
-      acashpledge = #{record.acashpledge,jdbcType=INTEGER}
+      acashpledge = #{record.acashpledge,jdbcType=INTEGER},
+      adelsign = #{record.adelsign,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="acashpledge != null">
         acashpledge = #{acashpledge,jdbcType=INTEGER},
       </if>
+      <if test="adelsign != null">
+        adelsign = #{adelsign,jdbcType=INTEGER},
+      </if>
     </set>
     where areaid = #{areaid,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,8 @@
       areaintro = #{areaintro,jdbcType=VARCHAR},
       areapic = #{areapic,jdbcType=VARCHAR},
       aunprice = #{aunprice,jdbcType=INTEGER},
-      acashpledge = #{acashpledge,jdbcType=INTEGER}
+      acashpledge = #{acashpledge,jdbcType=INTEGER},
+      adelsign = #{adelsign,jdbcType=INTEGER}
     where areaid = #{areaid,jdbcType=INTEGER}
   </update>
 </mapper>

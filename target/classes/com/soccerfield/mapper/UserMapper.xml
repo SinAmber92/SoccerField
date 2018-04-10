@@ -8,6 +8,7 @@
     <result column="utelphone" jdbcType="VARCHAR" property="utelphone" />
     <result column="upersonid" jdbcType="VARCHAR" property="upersonid" />
     <result column="uicon" jdbcType="VARCHAR" property="uicon" />
+    <result column="uaccess" jdbcType="INTEGER" property="uaccess" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    userid, upassword, username, utelphone, upersonid, uicon
+    userid, upassword, username, utelphone, upersonid, uicon, uaccess
   </sql>
   <select id="selectByExample" parameterType="com.soccerfield.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.soccerfield.entity.User">
     insert into user (userid, upassword, username, 
-      utelphone, upersonid, uicon
-      )
+      utelphone, upersonid, uicon, 
+      uaccess)
     values (#{userid,jdbcType=INTEGER}, #{upassword,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{utelphone,jdbcType=VARCHAR}, #{upersonid,jdbcType=VARCHAR}, #{uicon,jdbcType=VARCHAR}
-      )
+      #{utelphone,jdbcType=VARCHAR}, #{upersonid,jdbcType=VARCHAR}, #{uicon,jdbcType=VARCHAR}, 
+      #{uaccess,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.soccerfield.entity.User">
     insert into user
@@ -129,6 +130,9 @@
       <if test="uicon != null">
         uicon,
       </if>
+      <if test="uaccess != null">
+        uaccess,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="uicon != null">
         #{uicon,jdbcType=VARCHAR},
+      </if>
+      <if test="uaccess != null">
+        #{uaccess,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.uicon != null">
         uicon = #{record.uicon,jdbcType=VARCHAR},
       </if>
+      <if test="record.uaccess != null">
+        uaccess = #{record.uaccess,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       username = #{record.username,jdbcType=VARCHAR},
       utelphone = #{record.utelphone,jdbcType=VARCHAR},
       upersonid = #{record.upersonid,jdbcType=VARCHAR},
-      uicon = #{record.uicon,jdbcType=VARCHAR}
+      uicon = #{record.uicon,jdbcType=VARCHAR},
+      uaccess = #{record.uaccess,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="uicon != null">
         uicon = #{uicon,jdbcType=VARCHAR},
       </if>
+      <if test="uaccess != null">
+        uaccess = #{uaccess,jdbcType=INTEGER},
+      </if>
     </set>
     where userid = #{userid,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,8 @@
       username = #{username,jdbcType=VARCHAR},
       utelphone = #{utelphone,jdbcType=VARCHAR},
       upersonid = #{upersonid,jdbcType=VARCHAR},
-      uicon = #{uicon,jdbcType=VARCHAR}
+      uicon = #{uicon,jdbcType=VARCHAR},
+      uaccess = #{uaccess,jdbcType=INTEGER}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

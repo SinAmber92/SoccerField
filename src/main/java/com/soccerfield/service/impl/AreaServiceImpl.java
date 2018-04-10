@@ -22,7 +22,7 @@ public class AreaServiceImpl implements AreaService {
 	public List<Area> getInfoByStaid(Integer staid) {
 		
 		AreaExample areaExample = new AreaExample();
-		areaExample.createCriteria().andStaidEqualTo(staid);
+		areaExample.createCriteria().andStaidEqualTo(staid).andAdelsignEqualTo(0);
 		
 		return areaMapper.selectByExample(areaExample);
 	}

@@ -1,15 +1,8 @@
 package com.soccerfield.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,9 +37,6 @@ public class UserController {
 	@ResponseBody
 	public Response login(@RequestBody UserLoginPostbody userLoginPostbody,HttpServletRequest request){
 		
-//		System.out.println("----------------------------");
-//		System.out.println(utelphone+"|"+upassword);
-		
 		Response response = new Response();
 		
 		List<User> ulist = userService.login(userLoginPostbody.getUtelphone(), userLoginPostbody.getUpassword());
@@ -62,21 +52,14 @@ public class UserController {
 			response.setMessage("登录失败！");
 		}
 		return response;
-		
-/*		for (User user : ulist) {
-//			System.out.println("lalalal");
-			return user;
-		}
-//		System.out.println("ooo");
-		return null;*/
-		
+
 	}
-	
+		
 	//注册用户
 	@RequestMapping("/register")
 	@ResponseBody
 	public Response register(String user){
-//		System.out.println(user);
+		
 		Response response = new Response();
 		JSONObject json = new JSONObject(user);
 		User nuser = new User();
@@ -86,6 +69,7 @@ public class UserController {
 		nuser.setUtelphone(json.optString("utelphone"));
 		nuser.setUpersonid(json.optString("upersonid"));
 		nuser.setUicon(json.optString("uicon"));
+		nuser.setUaccess(0);
 		
 		if(userService.register(nuser)==1){
 			response.setCode(0);
@@ -104,25 +88,20 @@ public class UserController {
 	public Response getUserInfo(String userid) {
 		Response response = new Response();
 		User user = userService.getUserByUserid(Integer.parseInt(userid));
-		File icon = downLoadIcon(user.getUicon());
+		String icon = user.getUicon();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
 		map.put("icon", icon);
 		return response;
 	}
 	
-	
 	//修改用户信息
 	@RequestMapping("/modify")
 	@ResponseBody
 	public Response modify(String user,HttpServletRequest request){
-
-//		System.out.println(user);
+		
 		Response response = new Response();
 		User olduser = (User) request.getSession().getAttribute("user");
-		
-//		System.out.println("--------------------------");
-//		System.out.println(olduser);
 		
 		if(olduser!=null){
 
@@ -134,7 +113,7 @@ public class UserController {
 			nuser.setUpassword(json.optString("upassword"));
 			nuser.setUtelphone(json.optString("utelphone"));
 			nuser.setUpersonid(json.optString("upersonid"));
-			nuser.setUicon(uploadFile(new File(json.optString("uicon"))));
+			nuser.setUicon(json.optString("uicon"));
 			
 			if(userService.modify(nuser)==1){
 				response.setCode(0);
@@ -165,54 +144,189 @@ public class UserController {
 			response.setCode(0);
 			response.setMessage("退出成功！");
 		}else{
-			request.getSession().invalidate();
 			response.setCode(1);
 			response.setMessage("未登录！");
 		}
 
 		return response;
 	}
+
+/********************************后台管理************************************************/
+	//后台管理员注册用户
+	@RequestMapping("/vipRegister")
+	@ResponseBody
+	public Response vipRegister(String user,HttpServletRequest request){
 	
-	//上传文件
-	private String uploadFile(File file){
+		Response response = new Response();
+		User vipuser = (User) request.getSession().getAttribute("user");
 		
-		String path = Response.class.getClassLoader().getResource("").getPath()+"icon/"+file.getName();
-		File copyFile = new File(path);
+		JSONObject json = new JSONObject(user);
+		User nuser = new User();
 		
-		InputStream fis = null;
-		OutputStream fos = null;
+		nuser.setUsername(json.optString("username"));
+		nuser.setUpassword(json.optString("upassword"));
+		nuser.setUtelphone(json.optString("utelphone"));
+		nuser.setUpersonid(json.optString("upersonid"));
+		nuser.setUicon(json.optString("uicon"));
 		
-		try {
-			fis = new FileInputStream(file);
-			fos = new FileOutputStream(copyFile);
-			byte[] buff = new byte[20];//1024的倍数
-			while(fis.read(buff)!=-1){
-				fos.write(buff);
+		if(vipuser!=null){
+			if(vipuser.getUaccess()==2){
+				nuser.setUaccess(json.optInt("uaccess"));//高级管理员（2）可授权用户管理权限
+			}else{
+				nuser.setUaccess(0);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fis != null) {
-					fis.close();
-				}
-				if (fos != null) {
-					fos.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(userService.register(nuser)==1){
+				response.setCode(0);
+				response.setMessage("注册成功！");
+			}else{
+				response.setCode(1);
+				response.setMessage("注册失败！");
 			}
+		}else{
+			response.setCode(2);
+			response.setMessage("未登录！");
 		}
-		
-		return path;
+		return response;
+				
 	}
 	
-	//下载图片
-	private File downLoadIcon(String path) {
-		return new File(path);
+	//后台管理员编辑用户
+	@RequestMapping("/vipmodify")
+	@ResponseBody
+	public Response vipModify(String user,HttpServletRequest request){
+
+		Response response = new Response();
+		User vipuser = (User) request.getSession().getAttribute("user");
+		
+		JSONObject json = new JSONObject(user);
+		User nuser = new User();
+		
+		nuser.setUserid(json.optInt("userid"));
+		nuser.setUsername(json.optString("username"));
+		nuser.setUpassword(json.optString("upassword"));
+		nuser.setUtelphone(json.optString("utelphone"));
+		nuser.setUpersonid(json.optString("upersonid"));
+		nuser.setUicon(json.optString("uicon"));
+		
+		if(vipuser!=null){
+			if(vipuser.getUaccess()==2){
+				nuser.setUaccess(json.optInt("uaccess"));//高级管理员（2）可更改用户管理权限
+			}
+			if(userService.modify(nuser)==1){
+				response.setCode(0);
+				response.setMessage("编辑成功！");
+				response.setData(user);
+			}else{
+				response.setCode(1);
+				response.setMessage("编辑失败！");
+			}
+		}else{
+			response.setCode(2);
+			response.setMessage("未登录！");
+		}
+		return response;
 	}
+	
+	//后台管理员删除用户
+	@RequestMapping("vipdeluser")
+	@ResponseBody
+	public Response vipDelUser(String userid,HttpServletRequest request){
+		
+		Response response = new Response();
+		User vipuser = (User) request.getSession().getAttribute("user");
+
+		if(vipuser!=null){
+			//高级管理员（2）有删除用户权限
+			if(vipuser.getUaccess()==2){
+				if(userService.delUser(Integer.parseInt(userid))==1){
+					response.setCode(0);
+					response.setMessage("删除成功！");
+				}else{
+					response.setCode(1);
+					response.setMessage("删除失败！");
+				}
+			}else{
+				response.setCode(3);
+				response.setMessage("删除失败！管理员没有删除权限！");
+			}
+
+		}else{
+			response.setCode(2);
+			response.setMessage("未登录！");
+		}
+
+		return response;
+	}
+	
+	//后台管理员登录用户
+	@RequestMapping(value="/viplogin",method=RequestMethod.POST)
+	@ResponseBody
+	public Response viplogin(@RequestBody UserLoginPostbody userLoginPostbody,HttpServletRequest request){
+		
+		Response response = new Response();
+		List<User> ulist = userService.login(userLoginPostbody.getUtelphone(), userLoginPostbody.getUpassword());
+
+		if(ulist.size()!=0){
+			User user = ulist.get(0);
+			if(user.getUaccess()==2||user.getUaccess()==1){
+				request.getSession().setAttribute("user", user);
+				response.setCode(0);
+				response.setMessage("登录成功！");
+				response.setData(user);
+			}else{
+				response.setCode(1);
+				response.setMessage("登录失败！您没有权限录入后台管理界面！");
+			}
+		}else{
+			response.setCode(2);
+			response.setMessage("登录失败！");
+		}
+		return response;
+
+	}
+	
+	//后台遍历用户信息
+	@RequestMapping(value="/vipshowusers",method=RequestMethod.POST)
+	@ResponseBody
+	public Response vipShowUsers(HttpServletRequest request){
+		
+		Response response = new Response();
+		User vipuser = (User) request.getSession().getAttribute("user");
+		
+		if(vipuser!=null){
+			//权限为2的用户登录可以看到所有用户的信息
+			if(vipuser.getUaccess()==2){
+				List<User> ulist = userService.getAllUser();
+				if(ulist.size() != 0){
+					response.setCode(0);
+					response.setMessage("遍历信息成功！");
+					response.setData(ulist);
+				}else{
+					response.setCode(1);
+					response.setMessage("遍历信息失败！");
+				}
+			//权限为1的用户登录后可以看到所有普同用户也就是权限为0的用户的信息
+			}else if(vipuser.getUaccess()==1){
+				List<User> ulist = userService.getNorUser();
+				if(ulist.size() != 0){
+					response.setCode(0);
+					response.setMessage("遍历信息成功！");
+					response.setData(ulist);
+				}else{
+					response.setCode(1);
+					response.setMessage("遍历信息失败！");
+				}
+			}else{
+				response.setCode(1);
+				response.setMessage("信息获取失败！该用户没有授权");
+			}
+		}else{
+			response.setCode(2);
+			response.setMessage("未登录！");
+		}
+		return response;
+	}
+	
 	
 }
 

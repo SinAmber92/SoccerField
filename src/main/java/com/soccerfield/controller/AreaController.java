@@ -52,7 +52,7 @@ public class AreaController {
 		Response response = new Response();
 		Area area = areaService.getInfoByAreaid(areaid);
 		
-		if(area.getAreaid()!= null){
+		if(area.getAreaid() != null){
 			response.setCode(0);
 			response.setMessage("查找指定区域信息成功！");
 			response.setData(area);

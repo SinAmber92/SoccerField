@@ -22,6 +22,13 @@ public interface UserService {
 	
 	//获取用户信息
 	User getUserByUserid(int userid);
-
 	
+	//遍历普通用户信息
+	List<User> getNorUser();
+	
+	//遍历全部用户信息
+	List<User> getAllUser();
+	
+	//删除指定用户
+	int delUser(int userid);
 }

@@ -19,7 +19,7 @@ import com.soccerfield.utils.Response;
 
 @RequestMapping("/orderlist")
 @Controller
-public class orderlistController {
+public class OrderlistController {
 	
 	@Resource
 	public OrderlistService orderlistService;
@@ -76,7 +76,7 @@ public class orderlistController {
 		orderlist.setAreaid(jobj.optInt("areaid"));
 		orderlist.setOrestarttime(jobj.optString("orestarttime"));
 
-		Area area = areaService.getInfoByAreaid(2);
+		Area area  = areaService.getInfoByAreaid(2);
 		
 		orderlist.setOrdertime(new Date());
 		orderlist.setStaid(area.getStaid());

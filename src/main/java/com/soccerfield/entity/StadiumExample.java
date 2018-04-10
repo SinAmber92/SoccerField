@@ -723,6 +723,66 @@ public class StadiumExample {
             addCriterion("staunittime not between", value1, value2, "staunittime");
             return (Criteria) this;
         }
+
+        public Criteria andSdelsignIsNull() {
+            addCriterion("sdelsign is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignIsNotNull() {
+            addCriterion("sdelsign is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignEqualTo(Integer value) {
+            addCriterion("sdelsign =", value, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignNotEqualTo(Integer value) {
+            addCriterion("sdelsign <>", value, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignGreaterThan(Integer value) {
+            addCriterion("sdelsign >", value, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sdelsign >=", value, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignLessThan(Integer value) {
+            addCriterion("sdelsign <", value, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignLessThanOrEqualTo(Integer value) {
+            addCriterion("sdelsign <=", value, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignIn(List<Integer> values) {
+            addCriterion("sdelsign in", values, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignNotIn(List<Integer> values) {
+            addCriterion("sdelsign not in", values, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignBetween(Integer value1, Integer value2) {
+            addCriterion("sdelsign between", value1, value2, "sdelsign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdelsignNotBetween(Integer value1, Integer value2) {
+            addCriterion("sdelsign not between", value1, value2, "sdelsign");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

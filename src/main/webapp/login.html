@@ -7,17 +7,22 @@
 		<script type="text/javascript">
 			$(function(){
 				$("#submit").click(function(){
-					var utelphone = $("#utelphone").val();
-					var upassword = $("#upassword").val();
+// 					var utelphone = $("#utelphone").val();
+// 					var upassword = $("#upassword").val();
+// 					var userLoginPostbody = {}
+// 					userLoginPostbody.utelphone = $("#utelphone").val();
+// 					userLoginPostbody.upassword = $("#upassword").val();
+				    var userLoginPostbody = {
+				    		utelphone:$("#utelphone").val(),
+				    		upassword:$("#upassword").val()
+				    }
 					$.ajax({
 						type:"post",
-						data:{
-							utelphone:utelphone,
-							upassword:upassword
-						},
 						url: "http://localhost:8080/SoccerField/user/login",
-						dataType:"json",
-						async:true,
+				        data: JSON.stringify(userLoginPostbody),//必要
+				        dataType:"json",
+				        contentType:"application/json;charset=utf-8", //有中文必须要加上charset=utf-8
+				        async: false,
 						success:function(data){
 								if(data.code==0){
 									console.log(data.data);
